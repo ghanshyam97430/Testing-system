@@ -1,0 +1,34 @@
+name: Secure Test Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display repository information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Use repository secret
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          if [ -z "$TEST_SECRET" ]; then
+            echo "TEST_SECRET is not configured."
+            exit 1
+          fi
+
+          echo "Secret is available."
