@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Check cross-repository artifact access
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN_dummy }}
+          GH_TOKEN: ${{ secrets.daGITHUB_TOKEN_dummy }}
         run: |
           OWNER="H-ghanshyam123"
           REPO="repo-test-action"
